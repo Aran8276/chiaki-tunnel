@@ -61,7 +61,6 @@ class Settings
 		};
 
 		ConfigurationItem ParseLine(std::string * line, std::string * value);
-		size_t GetB64encodeSize(size_t);
 
 	public:
 		// singleton configuration

@@ -61,17 +61,16 @@ target_include_directories(borealis PUBLIC
 
 find_package(glfw3 REQUIRED)
 find_library(EGL EGL)
-find_library(GLAPI glapi)
-find_library(DRM_NOUVEAU drm_nouveau)
-target_link_libraries(borealis
+target_link_libraries(borealis PUBLIC
 	glfw
-	${EGL}
-	${GLAPI}
-	${DRM_NOUVEAU})
+	${EGL})
 
 if(CHIAKI_IS_SWITCH)
 	target_compile_definitions(borealis PUBLIC
 		BOREALIS_RESOURCES="romfs:/")
+	find_library(GLAPI glapi)
+	find_library(DRM_NOUVEAU drm_nouveau)
+	target_link_libraries(borealis PUBLIC ${GLAPI} ${DRM_NOUVEAU})
 else()
 	target_compile_definitions(borealis PUBLIC
 		BOREALIS_RESOURCES="./switch/res/")
@@ -114,9 +113,7 @@ target_link_libraries(chiaki-borealis
 if(CHIAKI_IS_SWITCH)
 	# libnx is forced by the switch toolchain
 	find_library(Z z)
-	find_library(GLAPI glapi) # TODO: make it transitive from borealis
-	find_library(DRM_NOUVEAU drm_nouveau) # TODO: make it transitive from borealis
-	target_link_libraries(chiaki-borealis ${Z} ${GLAPI} ${DRM_NOUVEAU})
+	target_link_libraries(chiaki-borealis ${Z} ${GLAPI})
 endif()
 
 install(TARGETS chiaki-borealis

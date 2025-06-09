@@ -29,11 +29,7 @@ Settings::ConfigurationItem Settings::ParseLine(std::string *line, std::string *
 	return UNKNOWN;
 }
 
-size_t Settings::GetB64encodeSize(size_t in)
-{
-	// calculate base64 buffer size after encode
-	return ((4 * in / 3) + 3) & ~3;
-}
+#define B64_ENCODED_SIZE(in) (((4 * in / 3) + 3) & ~3)
 
 Settings *Settings::instance = nullptr;
 
@@ -458,8 +454,7 @@ std::string Settings::GetHostRPKey(Host *host)
 	{
 		if(host->rp_key_data || host->registered)
 		{
-			size_t rp_key_b64_sz = this->GetB64encodeSize(0x10);
-			char rp_key_b64[rp_key_b64_sz + 1] = { 0 };
+			char rp_key_b64[B64_ENCODED_SIZE(0x10) + 1] = { 0 };
 			ChiakiErrorCode err;
 			err = chiaki_base64_encode(
 				host->rp_key, 0x10,
@@ -502,8 +497,7 @@ std::string Settings::GetHostRPRegistKey(Host *host)
 	{
 		if(host->rp_key_data || host->registered)
 		{
-			size_t rp_regist_key_b64_sz = this->GetB64encodeSize(CHIAKI_SESSION_AUTH_SIZE);
-			char rp_regist_key_b64[rp_regist_key_b64_sz + 1] = { 0 };
+			char rp_regist_key_b64[B64_ENCODED_SIZE(CHIAKI_SESSION_AUTH_SIZE) + 1] = { 0 };
 			ChiakiErrorCode err;
 			err = chiaki_base64_encode(
 				(uint8_t *)host->rp_regist_key, CHIAKI_SESSION_AUTH_SIZE,
