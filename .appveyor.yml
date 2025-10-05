@@ -8,8 +8,6 @@ branches:
     - /^v\d.*$/
     - /^deploy-test(-.*)?$/
 
-build: off
-
 configuration:
   - Release
 
