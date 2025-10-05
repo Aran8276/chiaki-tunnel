@@ -16,6 +16,8 @@ for:
       only:
         - image: "Visual Studio 2019"
 
+    build: off
+
     install:
       - git submodule update --init --recursive
 
