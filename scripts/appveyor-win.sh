@@ -45,8 +45,8 @@ mkdir protoc && cd protoc
 wget https://github.com/protocolbuffers/protobuf/releases/download/v3.9.1/protoc-3.9.1-win64.zip && 7z x protoc-3.9.1-win64.zip
 cd ..
 export PATH="$PWD/protoc/bin:$PATH"
-
-python -m pip install protobuf==3.19.5
+    
+/c/Python37/python.exe -m pip install protobuf==3.19.5
 
 QT_PATH="C:/Qt/5.15/msvc2019_64"
 
