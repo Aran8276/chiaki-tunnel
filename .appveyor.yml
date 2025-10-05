@@ -11,8 +11,12 @@ branches:
 configuration:
   - Release
 
+environment:
+  PYTHON: "C:\\Python37"
+
 install:
   - git submodule update --init --recursive
+  - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
 
 build_script:
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
