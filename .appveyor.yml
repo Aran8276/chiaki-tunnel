@@ -8,6 +8,13 @@ branches:
     - /^v\d.*$/
     - /^deploy-test(-.*)?$/
 
+# Add this to enable and trigger RDP
+init:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+on_finish:
+  - ps: if($blockRdp) { iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/break-rdp.ps1')) }
+
 build: off
 
 configuration:
@@ -16,7 +23,7 @@ configuration:
 for:
   - matrix:
       only:
-        - image: "Visual-Studio 2019"
+        - image: "Visual Studio 2019"
 
     install:
       - git submodule update --init --recursive
@@ -25,8 +32,11 @@ for:
       - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
       - C:\msys64\usr\bin\bash -lc "cd \"%APPVEYOR_BUILD_FOLDER%\" && scripts/appveyor-win.sh"
 
+    # For debugging, you can also add the file listing here again
     after_build:
-      - ps: Get-ChildItem -Path ".\" -Recurse
+      - echo "--- START FILE LISTING ---"
+      - ps: Get-ChildItem -Path "." -Recurse -ErrorAction SilentlyContinue
+      - echo "--- END FILE LISTING ---"
 
     artifacts:
       - path: Chiaki
