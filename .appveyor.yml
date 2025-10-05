@@ -30,7 +30,7 @@ for:
       - dir /s
 
     artifacts:
-      - path: Chiaki
+      - path: build\Release\Chiaki
         name: Chiaki
-      - path: Chiaki-PDB
+      - path: build\Release\Chiaki-PDB
         name: Chiaki-PDB
