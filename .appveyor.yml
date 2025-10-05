@@ -16,7 +16,8 @@ environment:
 
 install:
   - git submodule update --init --recursive
-  - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+  - choco install python --version 3.7.9 -y
+  - SET PATH=C:\Python37;C:\Python37\Scripts;%PATH%
   - where python
   - python --version
 
