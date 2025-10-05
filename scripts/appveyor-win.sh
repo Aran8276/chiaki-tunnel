@@ -6,7 +6,7 @@ BUILD_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 BUILD_ROOT="$(echo $BUILD_ROOT | sed 's|^/\([a-z]\)|\1:|g')" # replace /c/... by c:/... for cmake to understand it
 echo "BUILD_ROOT=$BUILD_ROOT"
 
-ls /c/Python37-x64/
+ls /c/
 
 /c/Python37-x64/python.exe -m pip install protobuf==3.19.5
 
