@@ -22,9 +22,18 @@ for:
     build_script:
       - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
       - C:\msys64\usr\bin\bash -lc "cd \"%APPVEYOR_BUILD_FOLDER%\" && scripts/appveyor-win.sh"
+      # --- Add this line for debugging ---
+      # It will list all files and directories, so you can see where the build output is.
+      - cmd: dir /s
 
     artifacts:
-      - path: Chiaki
+      # Adjust the path based on your build script's output directory.
+      # Common paths for CMake projects are inside a 'build' or 'build/Release' folder.
+      # The following assumes the script creates a 'build' directory.
+      - path: build\Release\chiaki.exe
         name: Chiaki
-      - path: Chiaki-PDB
+      - path: build\Release\chiaki.pdb
         name: Chiaki-PDB
+      # As an alternative, you can capture the entire output directory as a zip.
+      # - path: build\Release
+      #   name: Chiaki-Build-Output
