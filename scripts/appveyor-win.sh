@@ -16,8 +16,6 @@ cd ..
 
 QT_PATH="C:/Qt/5.15.2/msvc2019_64"
 
-ls c/Qt/5.15.2/
-
 export PATH="$PWD/ninja:$PWD/yasm:$QT_PATH/bin:$PATH"
 
 scripts/build-ffmpeg.sh . --target-os=win64 --arch=x86_64 --toolchain=msvc
