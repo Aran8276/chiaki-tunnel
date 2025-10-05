@@ -16,7 +16,7 @@ configuration:
 for:
   - matrix:
       only:
-        - image: "Visual Studio 2019"
+        - image: "Visual-Studio 2019"
 
     install:
       - git submodule update --init --recursive
@@ -26,11 +26,10 @@ for:
       - C:\msys64\usr\bin\bash -lc "cd \"%APPVEYOR_BUILD_FOLDER%\" && scripts/appveyor-win.sh"
 
     after_build:
-      - echo "Listing files in the build folder..."
-      - dir /s
+      - ps: Get-ChildItem -Path ".\" -Recurse
 
     artifacts:
-      - path: build\Release\Chiaki
+      - path: Chiaki
         name: Chiaki
-      - path: build\Release\Chiaki-PDB
+      - path: Chiaki-PDB
         name: Chiaki-PDB
