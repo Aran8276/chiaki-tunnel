@@ -15,7 +15,7 @@ environment:
   PYTHON: "C:\\Python37"
 
 install:
-  - ls c/Qt
+  - ls c/qt
   # - git submodule update --init --recursive
   # - choco install python --version 3.7.9 -y
   # - SET PATH=C:\Python37;C:\Python37\Scripts;%PATH%
